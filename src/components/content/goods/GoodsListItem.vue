@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="">
+  <div class="goods-item" @click="itemClick">
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -11,19 +11,28 @@
 
 <script>
 export default {
-name:'GoodsListItem',
-props:{
-  goodsItem:{
-    type:Object,
-    default(){
-      return {}
+  name:'GoodsListItem',
+  props:{
+    goodsItem:{
+      type:Object,
+      default(){
+        return {}
+      }
+    }
+  },
+  methods: {
+    imageLoad() {
+      // 默认情况下，$bus是没有值的，所以在main.js文件中给该属性赋值一个Vue实例
+      this.$bus.$emit('itemImageLoad')
+    },
+    itemClick() {
+      this.$router.push('/detail/' + this.goodsItem.iid)
     }
   }
 }
-}
 </script>
 
-<style>
+<style scoped>
 .goods-item {
     padding-bottom: 40px;
     position: relative;

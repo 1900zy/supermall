@@ -2,13 +2,11 @@
   <div class="tab-control">
     <!-- 只是文字不同的话，没有必要用插槽 -->
     <div
-      v-for="(item, index) in titles"
-      :key="index"
+      v-for="(item, index) in titles" :key="index"
       class="tab-control-item"
       :class="{ active: index === currentIndex }"
-      @click="itemClick(index)"
-    >
-      <span>{{ item }}</span>
+      @click="itemClick(index)">
+      <span>{{item}}</span>
     </div>
   </div>
 </template>
@@ -49,7 +47,7 @@ export default {
   background-color: #fff;
 }
 .tab-control-item {
-  flex: 1;
+  flex: 1; /* 均等分 */
 }
 .tab-control-item span {
   padding: 2px;
@@ -60,6 +58,6 @@ export default {
 }
 
 .active span {
-  border-bottom: 3px solid var(--color-high-text);
+  border-bottom: 3px solid var(--color-tint);
 }
 </style>
